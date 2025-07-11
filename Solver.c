@@ -189,7 +189,7 @@ void print_path(graph **path, int length) {
     "Terra", "Tutamen", "Vacuos", "Venenum", "Vesania", "Victus", "Vinculum", "Vitium",
     "Vitreus", "Volatus"
     };
-    printf("Found path of length %d: ", length - 1); // length includes start node and end node
+    printf("Found path of length %d: ", length - 2);
     for (int i = 0; i < length; i++) {
         printf("%s ", aspect_names[path[i]->aspect]);
     }
