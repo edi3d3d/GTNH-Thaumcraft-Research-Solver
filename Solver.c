@@ -169,9 +169,8 @@ void print_graph() {
     for (int i = 0; i < MAX_NODES; i++) {
         if (graph_lookup[i]) {
             printf("Aspect %d : ", i);
-            for (int j = 0; j < graph_lookup[i]->count; j++) {
+            for (int j = 0; j < graph_lookup[i]->count; j++)
                 printf("%d ", graph_lookup[i]->connection[j]->aspect);
-            }
             printf("\n");
         }
     }
@@ -218,7 +217,7 @@ void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
     graph *start = graph_lookup[aspect1];
     graph *goal = graph_lookup[aspect2];
     if (!start || !goal) {
-        printf("Invalid node(s).\n");
+        printf("Invalid nodes.\n");
         return;
     }
 
