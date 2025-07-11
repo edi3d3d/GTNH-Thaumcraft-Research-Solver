@@ -17,6 +17,12 @@ To change the starting point of the research:
 
 If a valid path isn't found at that distance, the program will increment the distance and retry until a path is found.
 
+If you wish not to use a certain aspect just comment it out 
+eg:
+inside the function `populate()`
+```
+//add_aspect(Iter, Motus, Terra);
+```
 ---
 
 ### Example
