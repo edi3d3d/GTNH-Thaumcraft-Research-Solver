@@ -4,9 +4,9 @@
 #define MAX_NODES 70
 
 enum aspects{
-    Aer,            //NULL, NULL
+    Aer,            //NULL_ASPECT, NULL_ASPECT
     Alienis,        //Vacuos, Tenebrae
-    Aqua,           //NULL,NULL
+    Aqua,           //NULL_ASPECT,NULL_ASPECT
     Arbor,          //Aer, Terra
     Auram,          //Praecantatio, Aer
     Bestia,         //Motus, Victus
@@ -22,7 +22,7 @@ enum aspects{
     Gula,           //Fames, Vacuos
     Herba,          //Victus, Terra
     Humanus,        //Bestia, Cognitio
-    Ignis,          //NULL, NULL
+    Ignis,          //NULL_ASPECT, NULL_ASPECT
     Infernus,       //Ignis, Praecantatio
     Instrumentum,   //Humanus, Ordo
     Invidia,        //Sensus, Fames
@@ -40,9 +40,9 @@ enum aspects{
     Mortuus,        //Victus, Perdito
     Motus,          //Aer, Ordo
     Nebrisum,       //Lucrum,  Perfodio
-    Ordo,           //NULL, NULL
+    Ordo,           //NULL_ASPECT, NULL_ASPECT
     Pannus,         //Instrumentum, Bestia
-    Perditio,       //NULL, NULL
+    Perditio,       //NULL_ASPECT, NULL_ASPECT
     Perfodio,       //Humanus, Terra
     Permutatio,     //Perdito, Ordo
     Potentia,       //Ordo, Ignis
@@ -58,7 +58,7 @@ enum aspects{
     Tempus,         //Vacuos,  Ordo
     Tenebrae,       //Vacuos, Lux
     Terminus,       //Alienis, Lucrum 
-    Terra,          //NULL, NULL
+    Terra,          //NULL_ASPECT, NULL_ASPECT
     Tutamen,        //Instrumentum, Terra
     Vacuos,         //Aer, Perditio
     Venenum,        //Aqua, Perditio
