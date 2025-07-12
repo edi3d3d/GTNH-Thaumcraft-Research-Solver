@@ -12,17 +12,18 @@ Still in early development, feel free to modify and improve it.
 
 ## How to Use
 
-1. Download the exe, run it
-2. Type the aspect you're starting from and hit `enter` eg: Aer, Vacuos, Nebrisum, Perditio
-3. Same as 2. for the aspect you want to reach
-4. Type the number of aspects between the starting and ending aspect
+1. Download the .exe file
+2. Run it
+3. Type the aspect you're starting from and hit `enter` eg: Aer, Vacuos, Nebrisum, Perditio
+4. Same as 2. for the aspect you want to reach
+5. Type the number of aspects between the starting and ending aspect
    If there is nothing wrong it should show the list of aspects to form a path between the two
 
 
 How to remove aspects so the solver doesnt use them
 by default all aspects can be used
 
-1. Open `Solver.c`
+1. Open `ThaumSolver.c`
 2. In the function `populate()` add a `//` before the function `add_aspect` that has the aspects you wish not to use as the first parameter
    eg:
    If i wish not to use Fabrico than i change the line:
@@ -33,9 +34,9 @@ by default all aspects can be used
    ```
    //add_aspect(Fabrico, Humanus, Instrumentum);
    ```
-4. save
-5. compile
-6. run
+4. Save
+5. Compile
+6. Run
 
    when i make the CLI removing an aspect should be done inside the executable
 
