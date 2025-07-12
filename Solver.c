@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define MAX_NODES 70
+
 enum aspects{
     Aer,            //NULL, NULL
     Alienis,        //Vacuos, Tenebrae
@@ -68,6 +70,18 @@ enum aspects{
     Volatus         //Aer, Motus
 };
 
+const char* aspect_names[] = {
+    "Aer", "Alienis", "Aqua", "Arbor", "Auram", "Bestia", "Cognitio", "Corpus",
+    "Desidia", "Electrum", "Exanimis", "Fabrico", "Fames", "Gelum", "Gloria", "Gula",
+    "Herba", "Humanus", "Ignis", "Infernus", "Instrumentum", "Invidia", "Ira", "Iter",
+    "Limus", "Lucrum", "Lux", "Luxuria", "Machina", "Magneto", "Messis", "Metallum",
+    "Meto", "Mortuus", "Motus", "Nebrisum", "Ordo", "Pannus", "Perditio", "Perfodio",
+    "Permutatio", "Potentia", "Praecantatio", "Radio", "Sano", "Sensus", "Spiritus",
+    "Strontio", "Superbia", "Telum", "Tempestas", "Tempus", "Tenebrae", "Terminus",
+    "Terra", "Tutamen", "Vacuos", "Venenum", "Vesania", "Victus", "Vinculum", "Vitium",
+    "Vitreus", "Volatus"
+};
+
 typedef struct graph{
     enum aspects aspect;
     struct graph **connection;
@@ -86,18 +100,21 @@ void create_node(enum aspects aspect){
         graph_lookup[aspect]->connection = (graph**) malloc(sizeof(graph*) * graph_lookup[aspect]->size);
     }
 }
+
 void grow_node(graph *node) {
     if (node->count >= node->size) {
         node->size *= 2;
         node->connection = (graph**) realloc(node->connection, sizeof(graph*) * node->size);
     }
 }
+
 void add_edge(graph *node1, graph *node2) {
     grow_node(node1);
     grow_node(node2);
     node1->connection[node1->count++] = node2;
     node2->connection[node2->count++] = node1;
 }
+
 void add_aspect(enum aspects parent, enum aspects child1, enum aspects child2) {
     create_node(parent);
     create_node(child1);
@@ -105,6 +122,7 @@ void add_aspect(enum aspects parent, enum aspects child1, enum aspects child2) {
     add_edge(graph_lookup[parent], graph_lookup[child1]);
     add_edge(graph_lookup[parent], graph_lookup[child2]);
 }
+
 void populate() {
     add_aspect(Alienis, Vacuos, Tenebrae);
     add_aspect(Arbor, Aer, Terra);
@@ -165,6 +183,7 @@ void populate() {
     add_aspect(Vitreus, Terra, Ordo);
     add_aspect(Volatus, Aer, Motus);
 }
+
 void print_graph() {
     for (int i = 0; i < MAX_NODES; i++) {
         if (graph_lookup[i]) {
@@ -177,23 +196,12 @@ void print_graph() {
 }
 
 void print_path(graph **path, int length) {
-    const char* aspect_names[] = {
-    "Aer", "Alienis", "Aqua", "Arbor", "Auram", "Bestia", "Cognitio", "Corpus",
-    "Desidia", "Electrum", "Exanimis", "Fabrico", "Fames", "Gelum", "Gloria", "Gula",
-    "Herba", "Humanus", "Ignis", "Infernus", "Instrumentum", "Invidia", "Ira", "Iter",
-    "Limus", "Lucrum", "Lux", "Luxuria", "Machina", "Magneto", "Messis", "Metallum",
-    "Meto", "Mortuus", "Motus", "Nebrisum", "Ordo", "Pannus", "Perditio", "Perfodio",
-    "Permutatio", "Potentia", "Praecantatio", "Radio", "Sano", "Sensus", "Spiritus",
-    "Strontio", "Superbia", "Telum", "Tempestas", "Tempus", "Tenebrae", "Terminus",
-    "Terra", "Tutamen", "Vacuos", "Venenum", "Vesania", "Victus", "Vinculum", "Vitium",
-    "Vitreus", "Volatus"
-    };
     printf("Found path of length %d: ", length - 2);
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i < length; i++)
         printf("%s ", aspect_names[path[i]->aspect]);
-    }
     printf("\n");
 }
+
 short int dfs(graph *current, enum aspects goal, int remaining, graph **path, int depth) {
     path[depth] = current;
 
@@ -217,7 +225,7 @@ void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
     graph *start = graph_lookup[aspect1];
     graph *goal = graph_lookup[aspect2];
     if (!start || !goal) {
-        printf("Invalid nodes.\n");
+        printf("Invalid nodes\n");
         return;
     }
 
@@ -226,16 +234,54 @@ void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
 
     while (distance <= max_search) {
         if (dfs(start, aspect2, distance, temp_path, 0))
-            return;
+            return ;
         distance++;
     }
 
-    printf("No path found within %d steps.\n", max_search);
+    printf("No path found within %d steps\n", max_search);
 }
+
+int aspect_lookup(char *aspect_name){
+    for(int i = 0; i < 65; i++)
+        if(strcmp(aspect_name, aspect_names[i]) == 0)
+            return i;
+    
+    printf("Invalid nodes\n");
+    exit(0);
+}
+
+void cli(){
+    populate();
+}
+
+void free_graph() {
+    for (int i = 0; i < MAX_NODES; i++)
+        if (graph_lookup[i]) {
+            free(graph_lookup[i]->connection);
+            free(graph_lookup[i]);
+            graph_lookup[i] = NULL;
+        }
+}
+
 int main()
 {
-    populate();
-    print_graph();
-    path(Lucrum, Ordo, 3); //path from aspect 1 to aspect 2 with a distance
+    char aspect1[20], aspect2[20];
+    int distance;
+
+    cli();
+    
+    printf("Aspect1: ");
+    scanf("%s", aspect1);
+    
+    printf("Aspect2: ");
+    scanf("%s", aspect2);
+
+    printf("Distance: ");
+    scanf("%d", &distance);
+    printf("\n");
+    
+    path(aspect_lookup(aspect1), aspect_lookup(aspect2), distance); //path from aspect 1 to aspect 2
+    
+    free_graph();
     return 0;
 }
