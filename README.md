@@ -22,7 +22,7 @@ Still in early development, feel free to modify and improve it.
 
 
 How to remove aspects so the solver doesnt use them
-by default all aspects can be used
+By default all aspects can be used
 
 1. Open `ThaumSolver.c`
 2. In the function `populate()` add a `//` before the function `add_aspect` that has the aspects you wish not to use as the first parameter
