@@ -221,14 +221,17 @@ short int dfs(graph *current, enum aspects goal, int remaining, graph **path, in
 }
 
 void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
+    
     distance++;
+    
     graph *start = graph_lookup[aspect1];
     graph *goal = graph_lookup[aspect2];
+    
     if (!start || !goal) {
         printf("Invalid nodes\n");
-        return;
+        return ;
     }
-
+    
     int max_search = 50;
     graph *temp_path[50];
 
@@ -245,9 +248,7 @@ int aspect_lookup(char *aspect_name){
     for(int i = 0; i < 65; i++)
         if(strcmp(aspect_name, aspect_names[i]) == 0)
             return i;
-    
-    printf("Invalid nodes\n");
-    exit(0);
+    return -1;
 }
 
 void cli(){
@@ -269,19 +270,33 @@ int main()
     int distance;
 
     cli();
-    
-    printf("Aspect1: ");
-    scanf("%s", aspect1);
-    
-    printf("Aspect2: ");
-    scanf("%s", aspect2);
 
-    printf("Distance: ");
-    scanf("%d", &distance);
-    printf("\n");
-    
-    path(aspect_lookup(aspect1), aspect_lookup(aspect2), distance); //path from aspect 1 to aspect 2
-    
+    do {
+        printf("Aspect1: ");
+        scanf("%s", aspect1);
+        
+        printf("Aspect2: ");
+        scanf("%s", aspect2);
+
+        printf("Distance: ");
+        scanf("%d", &distance);
+        printf("\n");
+
+        int aspect1_pos = aspect_lookup(aspect1);
+        int aspect2_pos = aspect_lookup(aspect2);
+        
+        if(aspect1_pos == -1 || aspect2_pos == -1) {
+            printf("Invalid node names\n");
+        } else {
+            path(aspect1_pos, aspect2_pos, distance); //path from aspect 1 to aspect 2
+        }
+
+        getchar();
+
+        printf("\nTo exit press q, else press any other button\n");
+        
+    } while(getchar() != 'q');
+
     free_graph();
     return 0;
 }
