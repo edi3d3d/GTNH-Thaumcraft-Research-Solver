@@ -67,7 +67,8 @@ enum aspects{
     Vinculum,       //Motus, Perditio
     Vitium,         //Perditio, Praecantatio
     Vitreus,        //Terra, Ordo
-    Volatus         //Aer, Motus
+    Volatus,        //Aer, Motus
+    NULL_ASPECT
 };
 
 const char* aspect_names[] = {
@@ -117,71 +118,95 @@ void add_edge(graph *node1, graph *node2) {
 
 void add_aspect(enum aspects parent, enum aspects child1, enum aspects child2) {
     create_node(parent);
-    create_node(child1);
-    create_node(child2);
-    add_edge(graph_lookup[parent], graph_lookup[child1]);
-    add_edge(graph_lookup[parent], graph_lookup[child2]);
+    if (child1 != NULL_ASPECT) 
+        add_edge(graph_lookup[parent], graph_lookup[child1]);
+
+    if(child2 != NULL_ASPECT)
+        add_edge(graph_lookup[parent], graph_lookup[child2]);
 }
 
 void populate() {
-    add_aspect(Alienis, Vacuos, Tenebrae);
+    //0
+    add_aspect(Aer, NULL_ASPECT, NULL_ASPECT);
+    add_aspect(Aqua, NULL_ASPECT, NULL_ASPECT);
+    add_aspect(Ignis, NULL_ASPECT, NULL_ASPECT);
+    add_aspect(Ordo, NULL_ASPECT, NULL_ASPECT);
+    add_aspect(Perditio, NULL_ASPECT, NULL_ASPECT);
+    add_aspect(Terra, NULL_ASPECT, NULL_ASPECT);
+
+    //1
     add_aspect(Arbor, Aer, Terra);
-    add_aspect(Auram, Praecantatio, Aer);
-    add_aspect(Bestia, Motus, Victus);
-    add_aspect(Cognitio, Ignis, Spiritus);
-    add_aspect(Corpus, Mortuus, Bestia);
-    add_aspect(Desidia, Vinculum, Spiritus);
-    add_aspect(Electrum, Potentia, Machina);
-    add_aspect(Exanimis, Motus, Mortuus);
-    add_aspect(Fabrico, Humanus, Instrumentum);
-    add_aspect(Fames, Victus, Vacuos);
-    add_aspect(Gelum, Ignis, Perditio);
-    add_aspect(Gloria, Humanus, Iter);
-    add_aspect(Gula, Fames, Vacuos);
-    add_aspect(Herba, Victus, Terra);
-    add_aspect(Humanus, Bestia, Cognitio);
-    add_aspect(Infernus, Ignis, Praecantatio);
-    add_aspect(Instrumentum, Humanus, Ordo);
-    add_aspect(Invidia, Sensus, Fames);
-    add_aspect(Ira, Telum, Ignis);
-    add_aspect(Iter, Motus, Terra);
-    add_aspect(Limus, Victus, Aqua);
-    add_aspect(Lucrum, Humanus, Fames);
     add_aspect(Lux, Aer, Ignis);
-    add_aspect(Luxuria, Corpus, Fames);
-    add_aspect(Machina, Motus, Instrumentum);
-    add_aspect(Magneto, Metallum, Iter);
-    add_aspect(Messis, Herba, Humanus);
-    add_aspect(Metallum, Terra, Vitreus);
-    add_aspect(Meto, Messis, Nebrisum);
-    add_aspect(Mortuus, Victus, Perditio);
     add_aspect(Motus, Aer, Ordo);
-    add_aspect(Nebrisum, Lucrum, Perfodio);
-    add_aspect(Pannus, Instrumentum, Bestia);
-    add_aspect(Perfodio, Humanus, Terra);
-    add_aspect(Permutatio, Perditio, Ordo);
-    add_aspect(Potentia, Ordo, Ignis);
-    add_aspect(Praecantatio, Vacuos, Potentia);
-    add_aspect(Radio, Potentia, Lux);
-    add_aspect(Sano, Victus, Ordo);
-    add_aspect(Sensus, Aer, Spiritus);
-    add_aspect(Spiritus, Victus, Mortuus);
-    add_aspect(Strontio, Perditio, Cognitio);
-    add_aspect(Superbia, Volatus, Vacuos);
-    add_aspect(Telum, Instrumentum, Ignis);
     add_aspect(Tempestas, Aer, Aqua);
-    add_aspect(Tempus, Vacuos, Ordo);
-    add_aspect(Tenebrae, Vacuos, Lux);
-    add_aspect(Terminus, Alienis, Lucrum);
-    add_aspect(Tutamen, Instrumentum, Terra);
     add_aspect(Vacuos, Aer, Perditio);
     add_aspect(Venenum, Aqua, Perditio);
-    add_aspect(Vesania, Cognitio, Vitium);
     add_aspect(Victus, Aqua, Terra);
-    add_aspect(Vinculum, Motus, Perditio);
-    add_aspect(Vitium, Perditio, Praecantatio);
+    add_aspect(Potentia, Ordo, Ignis);
     add_aspect(Vitreus, Terra, Ordo);
+    add_aspect(Permutatio, Perditio, Ordo);
+    add_aspect(Gelum, Ignis, Perditio);
+
+    //2
+    add_aspect(Radio, Potentia, Lux);
+    add_aspect(Tempus, Vacuos, Ordo);
+    add_aspect(Tenebrae, Vacuos, Lux);
+    add_aspect(Praecantatio, Vacuos, Potentia);
+    add_aspect(Iter, Motus, Terra);
+    add_aspect(Bestia, Motus, Victus);
+    add_aspect(Mortuus, Victus, Perditio);
+    add_aspect(Vinculum, Motus, Perditio);
+    add_aspect(Fames, Victus, Vacuos);
+    add_aspect(Herba, Victus, Terra);
     add_aspect(Volatus, Aer, Motus);
+    add_aspect(Metallum, Terra, Vitreus);
+    add_aspect(Sano, Victus, Ordo);
+
+    //3
+    add_aspect(Spiritus, Victus, Mortuus);
+    add_aspect(Corpus, Mortuus, Bestia);
+    add_aspect(Exanimis, Motus, Mortuus);
+    add_aspect(Gula, Fames, Vacuos);
+    add_aspect(Infernus, Ignis, Praecantatio);
+    add_aspect(Auram, Praecantatio, Aer);
+    add_aspect(Magneto, Metallum, Iter);
+    add_aspect(Vitium, Perditio, Praecantatio);
+    add_aspect(Superbia, Volatus, Vacuos);
+    add_aspect(Alienis, Vacuos, Tenebrae);
+    
+    //4
+    add_aspect(Cognitio, Ignis, Spiritus);
+    add_aspect(Desidia, Vinculum, Spiritus);
+    add_aspect(Sensus, Aer, Spiritus);
+    add_aspect(Limus, Victus, Aqua);
+    add_aspect(Luxuria, Corpus, Fames);
+    
+    //5
+    add_aspect(Humanus, Bestia, Cognitio);
+    add_aspect(Invidia, Sensus, Fames);
+    add_aspect(Strontio, Perditio, Cognitio);
+    add_aspect(Vesania, Cognitio, Vitium);
+    
+    //6
+    add_aspect(Lucrum, Humanus, Fames);
+    add_aspect(Gloria, Humanus, Iter);
+    add_aspect(Instrumentum, Humanus, Ordo);
+    add_aspect(Messis, Herba, Humanus);
+    add_aspect(Perfodio, Humanus, Terra);
+
+    //7
+    add_aspect(Machina, Motus, Instrumentum);
+    add_aspect(Fabrico, Humanus, Instrumentum);
+    add_aspect(Telum, Instrumentum, Ignis);
+    add_aspect(Nebrisum, Lucrum, Perfodio);
+    add_aspect(Pannus, Instrumentum, Bestia);
+    add_aspect(Terminus, Alienis, Lucrum);
+    add_aspect(Tutamen, Instrumentum, Terra);
+
+    //8
+    add_aspect(Electrum, Potentia, Machina);
+    add_aspect(Ira, Telum, Ignis);
+    add_aspect(Meto, Messis, Nebrisum);
 }
 
 void print_graph() {
