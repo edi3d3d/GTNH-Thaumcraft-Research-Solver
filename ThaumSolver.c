@@ -7,7 +7,7 @@ enum aspects{
     Aer,            //NULL_ASPECT, NULL_ASPECT
     Alienis,        //Vacuos, Tenebrae
     Aqua,           //NULL_ASPECT,NULL_ASPECT
-    Arbor,          //Aer, Terra
+    Arbor,          //Aer, Herba
     Auram,          //Praecantatio, Aer
     Bestia,         //Motus, Victus
     Cognitio,       //Ignis, Spiritus
@@ -135,7 +135,6 @@ void populate() {
     add_aspect(Terra, NULL_ASPECT, NULL_ASPECT);
 
     //1
-    add_aspect(Arbor, Aer, Terra);
     add_aspect(Lux, Aer, Ignis);
     add_aspect(Motus, Aer, Ordo);
     add_aspect(Tempestas, Aer, Aqua);
@@ -146,7 +145,7 @@ void populate() {
     add_aspect(Vitreus, Terra, Ordo);
     add_aspect(Permutatio, Perditio, Ordo);
     add_aspect(Gelum, Ignis, Perditio);
-
+    
     //2
     add_aspect(Radio, Potentia, Lux);
     add_aspect(Tempus, Vacuos, Ordo);
@@ -161,8 +160,9 @@ void populate() {
     add_aspect(Volatus, Aer, Motus);
     add_aspect(Metallum, Terra, Vitreus);
     add_aspect(Sano, Victus, Ordo);
-
+    
     //3
+    add_aspect(Arbor, Aer, Herba);
     add_aspect(Spiritus, Victus, Mortuus);
     add_aspect(Corpus, Mortuus, Bestia);
     add_aspect(Exanimis, Motus, Mortuus);
