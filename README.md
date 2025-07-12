@@ -15,8 +15,9 @@ Still in early development, feel free to modify and improve it.
 1. Download the .exe file
 2. Run it
 3. Type the aspect you're starting from and hit `enter` eg: Aer, Vacuos, Nebrisum, Perditio
-4. Same as 2. for the aspect you want to reach
-5. Type the number of aspects between the starting and ending aspect
+   You can find all aspects and how to create each one inside the file `Aspects.txt`
+5. Same as 3. for the aspect you want to reach
+6. Type the number of aspects between the starting and ending aspect
    If there is nothing wrong it should show the list of aspects to form a path between the two
 
 
