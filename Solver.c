@@ -318,7 +318,7 @@ int main()
 
         getchar();
 
-        printf("\nTo exit press q, else press any other button\n");
+        printf("\nTo exit enter q, else enter any other button\n");
         
     } while(getchar() != 'q');
 
