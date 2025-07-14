@@ -68,6 +68,7 @@ enum aspects{
     Vitium,         //Perditio, Praecantatio
     Vitreus,        //Terra, Ordo
     Volatus,        //Aer, Motus
+    Caelum,         //Vitreus, Metallum
     NULL_ASPECT
 };
 
@@ -80,7 +81,7 @@ const char* aspect_names[] = {
     "Permutatio", "Potentia", "Praecantatio", "Radio", "Sano", "Sensus", "Spiritus",
     "Strontio", "Superbia", "Telum", "Tempestas", "Tempus", "Tenebrae", "Terminus",
     "Terra", "Tutamen", "Vacuos", "Venenum", "Vesania", "Victus", "Vinculum", "Vitium",
-    "Vitreus", "Volatus"
+    "Vitreus", "Volatus", "Caelum"
 };
 
 typedef struct graph{
@@ -270,7 +271,7 @@ void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
 }
 
 int aspect_lookup(char *aspect_name){
-    for(int i = 0; i < 65; i++)
+    for(int i = 0; i < MAX_NODES; i++)
         if(strcmp(aspect_name, aspect_names[i]) == 0)
             return i;
     return -1;
@@ -297,10 +298,10 @@ int main()
     cli();
 
     do {
-        printf("Aspect1: ");
+        printf("Aspect 1: ");
         scanf("%s", aspect1);
         
-        printf("Aspect2: ");
+        printf("Aspect 2: ");
         scanf("%s", aspect2);
 
         printf("Distance: ");
