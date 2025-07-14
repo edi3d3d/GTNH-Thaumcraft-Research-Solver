@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX_NODES 70
+#define MAX_SEARCH 50
 
 enum aspects{
     Aer,            //NULL_ASPECT, NULL_ASPECT
@@ -104,6 +105,8 @@ void create_node(enum aspects aspect){
 }
 
 void grow_node(graph *node) {
+    if(node == NULL)
+        return ;
     if (node->count >= node->size) {
         node->size *= 2;
         node->connection = (graph**) realloc(node->connection, sizeof(graph*) * node->size);
@@ -111,6 +114,9 @@ void grow_node(graph *node) {
 }
 
 void add_edge(graph *node1, graph *node2) {
+    if(node1 == NULL || node2 == NULL)
+        return ;
+    
     grow_node(node1);
     grow_node(node2);
     node1->connection[node1->count++] = node2;
@@ -119,6 +125,7 @@ void add_edge(graph *node1, graph *node2) {
 
 void add_aspect(enum aspects parent, enum aspects child1, enum aspects child2) {
     create_node(parent);
+
     if (child1 != NULL_ASPECT) 
         add_edge(graph_lookup[parent], graph_lookup[child1]);
 
@@ -258,16 +265,15 @@ void path(enum aspects aspect1, enum aspects aspect2, short int distance) {
         return ;
     }
     
-    int max_search = 50;
-    graph *temp_path[50];
+    graph *temp_path[MAX_SEARCH];
 
-    while (distance <= max_search) {
+    while (distance <= MAX_SEARCH) {
         if (dfs(start, aspect2, distance, temp_path, 0))
             return ;
         distance++;
     }
 
-    printf("No path found within %d steps\n", max_search);
+    printf("No path found within %d steps\n", MAX_SEARCH);
 }
 
 int aspect_lookup(char *aspect_name){
