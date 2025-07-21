@@ -27,7 +27,7 @@ By default all aspects can be used
 1. Open `ThaumSolver.c`
 2. In the function `populate()` add a `//` before the function `add_aspect` that has the aspects you wish not to use as the first parameter
    eg:
-   If i wish not to use Fabrico than i change the line:
+   If you wish not to use Fabrico then change the line:
    ```
    add_aspect(Fabrico, Humanus, Instrumentum);
    ```
